@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ movie.title }}
+{% endblock %}
+{% block content %}
+  <div class="container py-5">
+    <h1 class="pb-2 mb-0">{{ movie.title }}</h1>
+    <div class="row mt-3">
+      <div class="col-12 col-md-6 mb-3">
+        <img 
+          class="img-fluid" 
+          height="400" width="300"
+          src="{% static 'img/image-holder.png' %}"
+          >      
+      </div>  
+      <div class="col mt-3">
+        <div class="col-12 col-md-6">
+          <h2>Жанр</h2>
+          <p>{{ movie.genre }}</p>      
+        </div>
+        <div class="col-12 col-md-6">
+          <h2>Описание</h2>
+          <p>{{ movie.description }}</p>      
+        </div>
+        <div class="col-12 col-md-6">
+          <h2>Сеансы</h2>
+          <ul>
+            {% for session_id in movie.sessions %}
+            <li>
+              <a href="{% url 'cinema:session_detail' session_id %}">{{ session_id }}</a>
+            </li>
+            {% endfor %}
+          </ul>      
+        </div>  
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
