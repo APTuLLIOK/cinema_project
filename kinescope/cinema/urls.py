@@ -10,5 +10,5 @@ urlpatterns = [
     path('sessions/<int:session_id>/',
          views.session_detail,
          name='session_detail'),
-    path('sessions/<slug:date>/', views.session_list, name='session_list'),
+    path('sessions/', views.session_list, name='session_list'),
 ]

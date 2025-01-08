@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
 {% block title %}
-  Список сеансов {{ date }}
+  Список сеансов
 {% endblock %}
 {% block content %}
   <div class="container py-5">
-    <h1>Список сеансов {{ date }}</h1>
+    <h1>Список сеансов</h1>
+    <br>
+    <div class="d-grid gap-2">
+      {% for session in sessions %}
+        <a class="btn btn-outline-dark btn-lg" href="{% url 'cinema:session_detail' session.id %}" role="button">{{ session.datetime }} - {{ session.movie }}</a>
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}

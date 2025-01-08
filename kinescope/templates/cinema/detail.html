@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 {% load static %}
 {% block title %}
   {{ movie.title }}
@@ -9,32 +10,29 @@
     <div class="row mt-3">
       <div class="col-12 col-md-6 mb-3">
         <img 
-          class="img-fluid" 
-          height="400" width="300"
-          src="{% static 'img/image-holder.png' %}"
-          >      
+          class="img-fluid card-img-top"
+          src="{{ movie.poster.url }}"
+          style="object-fit: contain; height: 700px;"
+        >      
       </div>  
       <div class="col mt-3">
         <div class="col-12 col-md-6">
-          <h2>Жанр</h2>
-          <p>{{ movie.genre }}</p>      
+          <h3>Жанр</h3>
+          <div class="badge bg-dark text-wrap" style="width: 8rem;">
+            {{ movie.genre }}
+          </div>      
         </div>
-        <div class="col-12 col-md-6">
-          <h2>Описание</h2>
-          <p>{{ movie.description }}</p>      
+        <div>
+          <h3>Описание</h3>
+          <h5>{{ movie.description }}</h5>      
         </div>
-        <div class="col-12 col-md-6">
-          <h2>Сеансы</h2>
-          <ul>
-            {% for session_id in movie.sessions %}
-            <li>
-              <a href="{% url 'cinema:session_detail' session_id %}">{{ session_id }}</a>
-            </li>
+        <h3>Сеансы</h3>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            {% for session in sessions %}
+              <a class="btn btn-outline-dark" href="{% url 'cinema:session_detail' session.id %}" role="button">{{ session.datetime }}</a>
             {% endfor %}
-          </ul>      
         </div>  
       </div>
     </div>
   </div>
-  
 {% endblock %}

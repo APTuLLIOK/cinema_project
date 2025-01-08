@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 {% load static %}
 {% block title %}
   Афиша
@@ -11,18 +12,22 @@
       <div class="col-6 col-md-4 my-1">
         <div class="card">
           <img 
-            class="img-fluid card-img-top" 
-            height="400" width="300"
-            src="{% static 'img/image-holder.png' %}"
+            class="img-fluid card-img-top"
+            src="{{ movie.poster.url }}"
+            style="object-fit: contain; height: 400px;"
           >
           <div class="card-body">           
             <h5 class="card-title">{{ movie.title }}</h5>
             <p class="card-text">
-              {{ movie.description|truncatewords:10 }}
+              Жанр: {{ movie.genre.title }}
             </p>
-            <a class="mt-3 regular-link" href="{% url 'cinema:movie_detail' movie.id %}">
-              Подробнее -->           
-            </a>
+            <p class="card-text">
+              Продолжительность: {{ movie.duration|time:"H:i" }}
+            </p>
+            <p class="card-text">
+              {{ movie.description|truncatewords:20 }}
+            </p>
+            <a class="btn btn-outline-dark btn-lg" href="{% url 'cinema:movie_detail' movie.id %}" role="button">Подробнее</a>
           </div>
         </div>
       </div>
