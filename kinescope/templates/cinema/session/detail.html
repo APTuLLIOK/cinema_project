@@ -22,7 +22,7 @@
           <h3>Места</h3>
           <div class="d-grid gap-2 row-2 col-1 d-md-flex">
             {% for seat_for_session in seats_for_session %}
-              <a class="btn btn-outline-dark" href="#" role="button">{{ seat_for_session.seat.number }}</a>
+              <a class="btn btn-outline-dark" href="{% url 'cinema:tickets' session.id %}" role="button">{{ seat_for_session.seat.number }}</a>
             {% endfor %}
           </div>
         </div>

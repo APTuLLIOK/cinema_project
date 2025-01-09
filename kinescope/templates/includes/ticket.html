@@ -1,0 +1,19 @@
+<div class="col d-flex justify-content-center">
+  <div class="card" style="width: 40rem;">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ ticket.seat_for_session.session.movie }}
+        {% if ticket.sold %}
+          <span class="badge bg-success">Куплен</span>
+        {% else %}
+          <span class="badge bg-secondary">В обработке</span>
+        {% endif %}
+      </h5>
+      <h6 class="card-text">
+        <p>Зал: {{ ticket.seat_for_session.session.hall }}</p>
+        <p>Время: {{ ticket.seat_for_session.session.datetime }}</p>
+        <p>Место: {{ ticket.seat_for_session }}</p>
+      </h6>
+    </div>
+  </div>
+</div>

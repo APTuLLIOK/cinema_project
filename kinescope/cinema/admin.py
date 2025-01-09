@@ -29,6 +29,9 @@ class SeatForSessionInline(admin.StackedInline):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
+    list_display = ('movie', 'hall', 'datetime')
+    list_filter = ('movie', 'hall', 'datetime')
+
     inlines = (
         SeatForSessionInline,
     )
@@ -36,4 +39,11 @@ class SessionAdmin(admin.ModelAdmin):
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('session', 'customer')
+
+    list_display = ('session', 'seat_for_session', 'customer', 'sold')
+    list_editable = ('seat_for_session', 'sold')
+
+    @admin.display(description='Session')
+    def session(self, obj):
+        return obj.seat_for_session.session

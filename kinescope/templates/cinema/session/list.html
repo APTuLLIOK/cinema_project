@@ -9,9 +9,10 @@
     <h1>Список сеансов</h1>
     <br>
     <div class="d-grid gap-2">
-      {% for session in sessions %}
+      {% for session in page_obj %}
         <a class="btn btn-outline-dark btn-lg" href="{% url 'cinema:session_detail' session.id %}" role="button">{{ session.datetime }} - {{ session.movie }}</a>
       {% endfor %}
     </div>
+    {% include "includes/paginator.html" %}
   </div>
 {% endblock %}

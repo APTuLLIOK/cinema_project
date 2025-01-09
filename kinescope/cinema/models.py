@@ -58,7 +58,7 @@ class Seat(models.Model):
         verbose_name_plural = 'Места'
 
     def __str__(self):
-        return f'{self.hall.title}-{self.number}'
+        return f'{self.hall.title} зал-{self.number}'
 
 
 class Movie(models.Model):
@@ -150,7 +150,7 @@ class SeatForSession(models.Model):
         verbose_name_plural = 'Места на сеанс'
 
     def __str__(self):
-        return f'{self.session.__str__()} - {self.seat.__str__()}'
+        return f'{self.seat.number}'
 
 
 class Ticket(models.Model):
@@ -165,6 +165,10 @@ class Ticket(models.Model):
         on_delete=models.RESTRICT,
         related_name='tickets',
         verbose_name='Покупатель'
+    )
+    sold = models.BooleanField(
+        verbose_name='Продан',
+        default=False
     )
 
     class Meta:
